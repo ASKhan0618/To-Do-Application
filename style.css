@@ -1,0 +1,201 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #545E93, #AAB0D6); /* from darker to lighter */
+}
+
+/* Main layout */
+.main-container {
+  padding: 30px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Input area */
+.input-container {
+  text-align: center;
+  margin-bottom: 30px;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  padding: 25px 0;
+  /* background-color: #B2B5E0; */
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  width: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+.main-heading {
+  color: #f8f9fa;
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-family: monospace;
+  white-space: nowrap;  
+  overflow: hidden;       
+  border-right: 2px solid #f8f9fa;
+  width: 0;
+  animation: typing 2s steps(17, end) forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 17ch; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+  100% { border-color: #f8f9fa; }
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#taskInput {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+#addTaskBtn {
+  padding: 10px 20px;
+  background-color: #f9c74f;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#addTaskBtn:hover {
+  background-color: #f9844a;
+  color: white;
+}
+
+.note-background {
+  border: none;
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+  border-radius: 30px 0 30px 0;
+  /* background-color:#C5ADC5; */
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  height: 80vh;
+  margin-top: -60px;  /* pull up the background */
+  padding-top: 70px;  /* push the content inside down to avoid being hidden */
+  position: relative;
+  z-index: 1;
+}
+
+/* Sticky note board layout */
+.note-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+/* Individual sticky note */
+.task-item {
+  background-color: #fff59d;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  min-height: 100px;
+  transition: transform 0.2s;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.task-item:hover {
+  transform: rotate(-1deg);
+}
+
+/* Editable text input */
+.task-item input[type="text"] {
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  background-color: transparent;
+  outline: none;
+}
+
+/* Buttons inside each note */
+.task-buttons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+}
+
+/* Tooltip wrapper */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.tooltip-wrapper button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.tooltip-wrapper button:hover {
+  color: red;
+}
+
+/* Tooltip styling */
+.custom-tooltip {
+  visibility: hidden;
+  width: 100px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Show tooltip on hover */
+.tooltip-wrapper:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
